@@ -12,16 +12,17 @@ public class LoginForController {
     public AnchorPane loginPaneContext;
 
     public void OpenSignupOnAction(ActionEvent actionEvent) throws IOException {
-        Stage stage= (Stage) loginPaneContext.getScene().getWindow();
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource(
-                "../view/SignUpForm.fxml"
-        ))));
+      setUI("SignUpForm");
     }
 
     public void dashboardbtnOnAction(ActionEvent actionEvent) throws IOException {
+        setUI("DashBoard");
+    }
+
+    public void setUI(String location) throws IOException {
         Stage stage= (Stage) loginPaneContext.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource(
-                "../view/DashBoard.fxml"
+                "../view/"+location+".fxml"
         ))));
     }
 }
