@@ -17,4 +17,11 @@ public class LoginForController {
                 "../view/SignUpForm.fxml"
         ))));
     }
+
+    public void dashboardbtnOnAction(ActionEvent actionEvent) throws IOException {
+        Stage stage= (Stage) loginPaneContext.getScene().getWindow();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource(
+                "../view/DashBoard.fxml"
+        ))));
+    }
 }
