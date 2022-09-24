@@ -1,6 +1,6 @@
 package Code.controller;
 
-import Code.dao.DatabaseAccess;
+import Code.dao.custom.impl.DoctorDaoImpl;
 import Code.entity.Doctor;
 import Code.view.table.DoctorTable;
 import com.jfoenix.controls.JFXButton;
@@ -57,7 +57,7 @@ public class DoctorFormController {
     }
     private void searchData(String text) {
         try {
-            ArrayList<Doctor> list = DatabaseAccess.searchDoctor(text);
+            ArrayList<Doctor> list = new DoctorDaoImpl().searchDoctors(text);
             ObservableList<DoctorTable> tableList = FXCollections.observableArrayList();
 
             for (Doctor d : list
@@ -70,7 +70,7 @@ public class DoctorFormController {
                     Optional<ButtonType> buttonType =alert.showAndWait();
                     if(buttonType.get()==ButtonType.YES){
                         try {
-                            if( new DatabaseAccess().deleteDoctor(d.getDid())){
+                            if( new DoctorDaoImpl().delete(d.getDid())){
                                 searchData(searchtext);
                                 new Alert(Alert.AlertType.CONFIRMATION,"Deleted").show();
                             }
@@ -99,7 +99,7 @@ public class DoctorFormController {
         );
         if(btnSaveDoctor.getText().equals("Save Doctor")){
             try {
-                boolean rslt= DatabaseAccess.saveDoctor(d1);
+                boolean rslt= new DoctorDaoImpl().save(d1);
                 if(rslt){
                     searchData(searchtext);
                     new Alert(Alert.AlertType.CONFIRMATION,"Saved").show();
@@ -114,7 +114,7 @@ public class DoctorFormController {
         }
         else{
             try {
-                boolean rslt= DatabaseAccess.updateDoctor(d1);
+                boolean rslt= new DoctorDaoImpl().update(d1);
                 if(rslt){
                     searchData(searchtext);
                     new Alert(Alert.AlertType.CONFIRMATION,"Updated").show();
